@@ -1,33 +1,30 @@
-const { program } = require("commander");
-const contacts = require("./db");
+// const { program } = require("commander");
 
-const invokeAction = async ({ action, id, name, email, phone }) => {
-  switch (action) {
-    case "read":
-      const allContacts = await contacts.getAll();
-      return console.log(allContacts);
-    case "getById":
-      const oneContact = await contacts.getById(id);
-      return console.log(oneContact);
-    case "add":
-      const newContact = await contacts.add({ name, phone });
-      return console.log(newContact);
-    case "updateById":
-      const updateContact = await contacts.updateById(id, { title, author });
-      return console.log(updateContact);
-    case "deleteById":
-      const deleteContact = await contacts.updateById(id);
-      return console.log(deleteBook);
-  }
-};
+const express = require("express");
+const moment = require("moment");
+const fs = require("fs/promises");
+const cors = require("cors");
+const app = express();
+const contactsRouter = require("./routes/api/contacts");
 
-program
-  .option("-a, --action <type>", "choose action")
-  .option("-i, --id <type>", "user id")
-  .option("-n, --name <type>", "user name")
-  .option("-e, --email <type>", "user email")
-  .option("-p, --phone <type>", "user phone");
+app.use(cors());
+app.use(express.json());
 
-program.parse();
-const options = program.opts();
-invokeAction(options);
+app.use("/api/contacts", contactsRouter);
+
+app.use(async (req, res, next) => {
+  const { method, url } = req;
+  const date = moment().format("DD-MM-YYYY_hh:mm:ss");
+  await fs.appendFile("./public/server.log", `\n${method} ${url} ${date}`);
+  next();
+});
+
+app.use((req, res) => {
+  res.status(404).json({ message: "Not fucking found" });
+});
+app.use((err, req, res, next) => {
+  const { status = 500, message = "Server error" } = err;
+  res.status(status).json({ message });
+});
+
+module.exports = app;
