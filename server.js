@@ -1,4 +1,17 @@
-const PORT = 5000;
+const mongoose = require("mongoose");
 
+const PORT = 5000;
 const app = require("./app");
-app.listen(PORT, () => console.log(`server is running on port ${PORT} `));
+
+const DB_HOST =
+  "mongodb+srv://admin:admin@cluster00.wonjyqu.mongodb.net/contacts_db?retryWrites=true&w=majority";
+
+mongoose
+  .connect(DB_HOST)
+  .then(() => {
+    app.listen(PORT);
+  })
+  .catch((error) => {
+    console.log(error.message);
+    process.exit(1);
+  });
