@@ -1,14 +1,13 @@
 const mongoose = require("mongoose");
+const express = require("express");
+const app = express();
 
-const DB_HOST =
-  "mongodb+srv://admin:admin@cluster00.wonjyqu.mongodb.net/contacts_db?retryWrites=true&w=majority";
+// const DB_HOST =
+//   "mongodb+srv://admin:admin@cluster00.wonjyqu.mongodb.net/contacts_db?retryWrites=true&w=majority";
 mongoose
   .connect(DB_HOST)
   .then(() => console.log("db connect suck sex"))
   .catch((error) => console.log(error.message));
-
-const express = require("express");
-const app = express();
 
 // const moment = require("moment");
 // const fs = require("fs/promises");
