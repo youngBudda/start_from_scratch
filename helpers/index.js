@@ -1,8 +1,9 @@
 const HttpError = require("./HttpError");
-const crtlWrapper = require("./ctrlWrapper");
-
+const ctrlWrapper = require("./ctrlWrapper");
+const handleMongooseError = require("./handleMongooseError");
 
 module.exports = {
   HttpError,
-  crtlWrapper,
+  ctrlWrapper,
+  handleMongooseError,
 };
