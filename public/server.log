@@ -8,3 +8,11 @@ GET /api/contacts/65ab110fb69bf0adcef88114 22-01-2024_05:07:49
 GET /api/contacts/65ab110fb69bf0adcef88114 22-01-2024_05:08:17
 GET /api/65ab110fb69bf0adcef88114 22-01-2024_05:30:16
 PUT /api/contacts 22-01-2024_08:23:06
+POST /api/login 23-01-2024_12:31:16
+POST /api/login 23-01-2024_12:32:39
+POST /api/login 23-01-2024_12:34:16
+POST /api/register 23-01-2024_12:36:44
+POST /api/auth/login 23-01-2024_12:41:00
+GET /api/current?page=1 23-01-2024_05:05:47
+GET /api/current?page=1 23-01-2024_05:07:08
+GET /api/current?page=1 23-01-2024_05:10:04

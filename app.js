@@ -3,22 +3,16 @@ const express = require("express");
 const app = express();
 require("dotenv").config();
 
-// const DB_HOST =
-//   "mongodb+srv://admin:admin@cluster00.wonjyqu.mongodb.net/contacts_db?retryWrites=true&w=majority";
-// mongoose
-//   .connect(DB_HOST)
-//   .then(() => console.log("db connect suck sex"))
-//   .catch((error) => console.log(error.message));
-
 const moment = require("moment");
-const fs = require("fs/promises");
 const cors = require("cors");
-
+const fs = require("fs/promises");
+const authRouter = require("./routes/api/auth");
 const contactsRouter = require("./routes/api/contacts");
 
 app.use(cors());
 app.use(express.json());
 
+app.use("/api/auth", authRouter);
 app.use("/api/contacts", contactsRouter);
 
 app.use(async (req, res, next) => {
